@@ -9,7 +9,7 @@ letsencrypt-client is a simple Java client for the letsencrypt service.
 
 Copy the sample config txt file and add your paths, domains, and urls.
 
-### Run
+## Run
 
 ```shell
 ./scripts/client.sh path-to-config-txt
