@@ -27,48 +27,62 @@ public final class Proto {
         getSessionUrlBytes();
 
     /**
-     * <code>optional int32 poll_sleep_duration_seconds = 4 [default = 10];</code>
+     * <code>optional int32 poll_sleep_duration_seconds = 2 [default = 10];</code>
      */
     boolean hasPollSleepDurationSeconds();
     /**
-     * <code>optional int32 poll_sleep_duration_seconds = 4 [default = 10];</code>
+     * <code>optional int32 poll_sleep_duration_seconds = 2 [default = 10];</code>
      */
     int getPollSleepDurationSeconds();
 
     /**
-     * <code>optional string acme_directory_prefix = 5 [default = ".well-known/acme-challenge"];</code>
+     * <code>optional string acme_directory_prefix = 3 [default = ".well-known/acme-challenge"];</code>
      */
     boolean hasAcmeDirectoryPrefix();
     /**
-     * <code>optional string acme_directory_prefix = 5 [default = ".well-known/acme-challenge"];</code>
+     * <code>optional string acme_directory_prefix = 3 [default = ".well-known/acme-challenge"];</code>
      */
     java.lang.String getAcmeDirectoryPrefix();
     /**
-     * <code>optional string acme_directory_prefix = 5 [default = ".well-known/acme-challenge"];</code>
+     * <code>optional string acme_directory_prefix = 3 [default = ".well-known/acme-challenge"];</code>
      */
     com.google.protobuf.ByteString
         getAcmeDirectoryPrefixBytes();
 
     /**
-     * <code>repeated .letsencrypt.AccountConfig account_config = 6;</code>
+     * <code>optional string restart_notification_filename = 4;</code>
+     */
+    boolean hasRestartNotificationFilename();
+    /**
+     * <code>optional string restart_notification_filename = 4;</code>
+     */
+    java.lang.String getRestartNotificationFilename();
+    /**
+     * <code>optional string restart_notification_filename = 4;</code>
+     */
+    com.google.protobuf.ByteString
+        getRestartNotificationFilenameBytes();
+
+    /**
+     * <code>repeated .letsencrypt.AccountConfig account_config = 5;</code>
      */
     java.util.List<letsencrypt.Proto.AccountConfig> 
         getAccountConfigList();
     /**
-     * <code>repeated .letsencrypt.AccountConfig account_config = 6;</code>
+     * <code>repeated .letsencrypt.AccountConfig account_config = 5;</code>
      */
     letsencrypt.Proto.AccountConfig getAccountConfig(int index);
     /**
-     * <code>repeated .letsencrypt.AccountConfig account_config = 6;</code>
+     * <code>repeated .letsencrypt.AccountConfig account_config = 5;</code>
      */
     int getAccountConfigCount();
     /**
-     * <code>repeated .letsencrypt.AccountConfig account_config = 6;</code>
+     * <code>repeated .letsencrypt.AccountConfig account_config = 5;</code>
      */
     java.util.List<? extends letsencrypt.Proto.AccountConfigOrBuilder> 
         getAccountConfigOrBuilderList();
     /**
-     * <code>repeated .letsencrypt.AccountConfig account_config = 6;</code>
+     * <code>repeated .letsencrypt.AccountConfig account_config = 5;</code>
      */
     letsencrypt.Proto.AccountConfigOrBuilder getAccountConfigOrBuilder(
         int index);
@@ -131,21 +145,27 @@ public final class Proto {
               sessionUrl_ = bs;
               break;
             }
-            case 32: {
+            case 16: {
               bitField0_ |= 0x00000002;
               pollSleepDurationSeconds_ = input.readInt32();
               break;
             }
-            case 42: {
+            case 26: {
               com.google.protobuf.ByteString bs = input.readBytes();
               bitField0_ |= 0x00000004;
               acmeDirectoryPrefix_ = bs;
               break;
             }
-            case 50: {
-              if (!((mutable_bitField0_ & 0x00000008) == 0x00000008)) {
+            case 34: {
+              com.google.protobuf.ByteString bs = input.readBytes();
+              bitField0_ |= 0x00000008;
+              restartNotificationFilename_ = bs;
+              break;
+            }
+            case 42: {
+              if (!((mutable_bitField0_ & 0x00000010) == 0x00000010)) {
                 accountConfig_ = new java.util.ArrayList<letsencrypt.Proto.AccountConfig>();
-                mutable_bitField0_ |= 0x00000008;
+                mutable_bitField0_ |= 0x00000010;
               }
               accountConfig_.add(input.readMessage(letsencrypt.Proto.AccountConfig.PARSER, extensionRegistry));
               break;
@@ -158,7 +178,7 @@ public final class Proto {
         throw new com.google.protobuf.InvalidProtocolBufferException(
             e.getMessage()).setUnfinishedMessage(this);
       } finally {
-        if (((mutable_bitField0_ & 0x00000008) == 0x00000008)) {
+        if (((mutable_bitField0_ & 0x00000010) == 0x00000010)) {
           accountConfig_ = java.util.Collections.unmodifiableList(accountConfig_);
         }
         this.unknownFields = unknownFields.build();
@@ -235,31 +255,31 @@ public final class Proto {
       }
     }
 
-    public static final int POLL_SLEEP_DURATION_SECONDS_FIELD_NUMBER = 4;
+    public static final int POLL_SLEEP_DURATION_SECONDS_FIELD_NUMBER = 2;
     private int pollSleepDurationSeconds_;
     /**
-     * <code>optional int32 poll_sleep_duration_seconds = 4 [default = 10];</code>
+     * <code>optional int32 poll_sleep_duration_seconds = 2 [default = 10];</code>
      */
     public boolean hasPollSleepDurationSeconds() {
       return ((bitField0_ & 0x00000002) == 0x00000002);
     }
     /**
-     * <code>optional int32 poll_sleep_duration_seconds = 4 [default = 10];</code>
+     * <code>optional int32 poll_sleep_duration_seconds = 2 [default = 10];</code>
      */
     public int getPollSleepDurationSeconds() {
       return pollSleepDurationSeconds_;
     }
 
-    public static final int ACME_DIRECTORY_PREFIX_FIELD_NUMBER = 5;
+    public static final int ACME_DIRECTORY_PREFIX_FIELD_NUMBER = 3;
     private java.lang.Object acmeDirectoryPrefix_;
     /**
-     * <code>optional string acme_directory_prefix = 5 [default = ".well-known/acme-challenge"];</code>
+     * <code>optional string acme_directory_prefix = 3 [default = ".well-known/acme-challenge"];</code>
      */
     public boolean hasAcmeDirectoryPrefix() {
       return ((bitField0_ & 0x00000004) == 0x00000004);
     }
     /**
-     * <code>optional string acme_directory_prefix = 5 [default = ".well-known/acme-challenge"];</code>
+     * <code>optional string acme_directory_prefix = 3 [default = ".well-known/acme-challenge"];</code>
      */
     public java.lang.String getAcmeDirectoryPrefix() {
       java.lang.Object ref = acmeDirectoryPrefix_;
@@ -276,7 +296,7 @@ public final class Proto {
       }
     }
     /**
-     * <code>optional string acme_directory_prefix = 5 [default = ".well-known/acme-challenge"];</code>
+     * <code>optional string acme_directory_prefix = 3 [default = ".well-known/acme-challenge"];</code>
      */
     public com.google.protobuf.ByteString
         getAcmeDirectoryPrefixBytes() {
@@ -292,35 +312,77 @@ public final class Proto {
       }
     }
 
-    public static final int ACCOUNT_CONFIG_FIELD_NUMBER = 6;
+    public static final int RESTART_NOTIFICATION_FILENAME_FIELD_NUMBER = 4;
+    private java.lang.Object restartNotificationFilename_;
+    /**
+     * <code>optional string restart_notification_filename = 4;</code>
+     */
+    public boolean hasRestartNotificationFilename() {
+      return ((bitField0_ & 0x00000008) == 0x00000008);
+    }
+    /**
+     * <code>optional string restart_notification_filename = 4;</code>
+     */
+    public java.lang.String getRestartNotificationFilename() {
+      java.lang.Object ref = restartNotificationFilename_;
+      if (ref instanceof java.lang.String) {
+        return (java.lang.String) ref;
+      } else {
+        com.google.protobuf.ByteString bs = 
+            (com.google.protobuf.ByteString) ref;
+        java.lang.String s = bs.toStringUtf8();
+        if (bs.isValidUtf8()) {
+          restartNotificationFilename_ = s;
+        }
+        return s;
+      }
+    }
+    /**
+     * <code>optional string restart_notification_filename = 4;</code>
+     */
+    public com.google.protobuf.ByteString
+        getRestartNotificationFilenameBytes() {
+      java.lang.Object ref = restartNotificationFilename_;
+      if (ref instanceof java.lang.String) {
+        com.google.protobuf.ByteString b = 
+            com.google.protobuf.ByteString.copyFromUtf8(
+                (java.lang.String) ref);
+        restartNotificationFilename_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
+    }
+
+    public static final int ACCOUNT_CONFIG_FIELD_NUMBER = 5;
     private java.util.List<letsencrypt.Proto.AccountConfig> accountConfig_;
     /**
-     * <code>repeated .letsencrypt.AccountConfig account_config = 6;</code>
+     * <code>repeated .letsencrypt.AccountConfig account_config = 5;</code>
      */
     public java.util.List<letsencrypt.Proto.AccountConfig> getAccountConfigList() {
       return accountConfig_;
     }
     /**
-     * <code>repeated .letsencrypt.AccountConfig account_config = 6;</code>
+     * <code>repeated .letsencrypt.AccountConfig account_config = 5;</code>
      */
     public java.util.List<? extends letsencrypt.Proto.AccountConfigOrBuilder> 
         getAccountConfigOrBuilderList() {
       return accountConfig_;
     }
     /**
-     * <code>repeated .letsencrypt.AccountConfig account_config = 6;</code>
+     * <code>repeated .letsencrypt.AccountConfig account_config = 5;</code>
      */
     public int getAccountConfigCount() {
       return accountConfig_.size();
     }
     /**
-     * <code>repeated .letsencrypt.AccountConfig account_config = 6;</code>
+     * <code>repeated .letsencrypt.AccountConfig account_config = 5;</code>
      */
     public letsencrypt.Proto.AccountConfig getAccountConfig(int index) {
       return accountConfig_.get(index);
     }
     /**
-     * <code>repeated .letsencrypt.AccountConfig account_config = 6;</code>
+     * <code>repeated .letsencrypt.AccountConfig account_config = 5;</code>
      */
     public letsencrypt.Proto.AccountConfigOrBuilder getAccountConfigOrBuilder(
         int index) {
@@ -331,6 +393,7 @@ public final class Proto {
       sessionUrl_ = "";
       pollSleepDurationSeconds_ = 10;
       acmeDirectoryPrefix_ = ".well-known/acme-challenge";
+      restartNotificationFilename_ = "";
       accountConfig_ = java.util.Collections.emptyList();
     }
     private byte memoizedIsInitialized = -1;
@@ -350,13 +413,16 @@ public final class Proto {
         output.writeBytes(1, getSessionUrlBytes());
       }
       if (((bitField0_ & 0x00000002) == 0x00000002)) {
-        output.writeInt32(4, pollSleepDurationSeconds_);
+        output.writeInt32(2, pollSleepDurationSeconds_);
       }
       if (((bitField0_ & 0x00000004) == 0x00000004)) {
-        output.writeBytes(5, getAcmeDirectoryPrefixBytes());
+        output.writeBytes(3, getAcmeDirectoryPrefixBytes());
+      }
+      if (((bitField0_ & 0x00000008) == 0x00000008)) {
+        output.writeBytes(4, getRestartNotificationFilenameBytes());
       }
       for (int i = 0; i < accountConfig_.size(); i++) {
-        output.writeMessage(6, accountConfig_.get(i));
+        output.writeMessage(5, accountConfig_.get(i));
       }
       getUnknownFields().writeTo(output);
     }
@@ -373,15 +439,19 @@ public final class Proto {
       }
       if (((bitField0_ & 0x00000002) == 0x00000002)) {
         size += com.google.protobuf.CodedOutputStream
-          .computeInt32Size(4, pollSleepDurationSeconds_);
+          .computeInt32Size(2, pollSleepDurationSeconds_);
       }
       if (((bitField0_ & 0x00000004) == 0x00000004)) {
         size += com.google.protobuf.CodedOutputStream
-          .computeBytesSize(5, getAcmeDirectoryPrefixBytes());
+          .computeBytesSize(3, getAcmeDirectoryPrefixBytes());
+      }
+      if (((bitField0_ & 0x00000008) == 0x00000008)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeBytesSize(4, getRestartNotificationFilenameBytes());
       }
       for (int i = 0; i < accountConfig_.size(); i++) {
         size += com.google.protobuf.CodedOutputStream
-          .computeMessageSize(6, accountConfig_.get(i));
+          .computeMessageSize(5, accountConfig_.get(i));
       }
       size += getUnknownFields().getSerializedSize();
       memoizedSerializedSize = size;
@@ -507,9 +577,11 @@ public final class Proto {
         bitField0_ = (bitField0_ & ~0x00000002);
         acmeDirectoryPrefix_ = ".well-known/acme-challenge";
         bitField0_ = (bitField0_ & ~0x00000004);
+        restartNotificationFilename_ = "";
+        bitField0_ = (bitField0_ & ~0x00000008);
         if (accountConfigBuilder_ == null) {
           accountConfig_ = java.util.Collections.emptyList();
-          bitField0_ = (bitField0_ & ~0x00000008);
+          bitField0_ = (bitField0_ & ~0x00000010);
         } else {
           accountConfigBuilder_.clear();
         }
@@ -553,10 +625,14 @@ public final class Proto {
           to_bitField0_ |= 0x00000004;
         }
         result.acmeDirectoryPrefix_ = acmeDirectoryPrefix_;
+        if (((from_bitField0_ & 0x00000008) == 0x00000008)) {
+          to_bitField0_ |= 0x00000008;
+        }
+        result.restartNotificationFilename_ = restartNotificationFilename_;
         if (accountConfigBuilder_ == null) {
-          if (((bitField0_ & 0x00000008) == 0x00000008)) {
+          if (((bitField0_ & 0x00000010) == 0x00000010)) {
             accountConfig_ = java.util.Collections.unmodifiableList(accountConfig_);
-            bitField0_ = (bitField0_ & ~0x00000008);
+            bitField0_ = (bitField0_ & ~0x00000010);
           }
           result.accountConfig_ = accountConfig_;
         } else {
@@ -591,11 +667,16 @@ public final class Proto {
           acmeDirectoryPrefix_ = other.acmeDirectoryPrefix_;
           onChanged();
         }
+        if (other.hasRestartNotificationFilename()) {
+          bitField0_ |= 0x00000008;
+          restartNotificationFilename_ = other.restartNotificationFilename_;
+          onChanged();
+        }
         if (accountConfigBuilder_ == null) {
           if (!other.accountConfig_.isEmpty()) {
             if (accountConfig_.isEmpty()) {
               accountConfig_ = other.accountConfig_;
-              bitField0_ = (bitField0_ & ~0x00000008);
+              bitField0_ = (bitField0_ & ~0x00000010);
             } else {
               ensureAccountConfigIsMutable();
               accountConfig_.addAll(other.accountConfig_);
@@ -608,7 +689,7 @@ public final class Proto {
               accountConfigBuilder_.dispose();
               accountConfigBuilder_ = null;
               accountConfig_ = other.accountConfig_;
-              bitField0_ = (bitField0_ & ~0x00000008);
+              bitField0_ = (bitField0_ & ~0x00000010);
               accountConfigBuilder_ = 
                 com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders ?
                    getAccountConfigFieldBuilder() : null;
@@ -722,19 +803,19 @@ public final class Proto {
 
       private int pollSleepDurationSeconds_ = 10;
       /**
-       * <code>optional int32 poll_sleep_duration_seconds = 4 [default = 10];</code>
+       * <code>optional int32 poll_sleep_duration_seconds = 2 [default = 10];</code>
        */
       public boolean hasPollSleepDurationSeconds() {
         return ((bitField0_ & 0x00000002) == 0x00000002);
       }
       /**
-       * <code>optional int32 poll_sleep_duration_seconds = 4 [default = 10];</code>
+       * <code>optional int32 poll_sleep_duration_seconds = 2 [default = 10];</code>
        */
       public int getPollSleepDurationSeconds() {
         return pollSleepDurationSeconds_;
       }
       /**
-       * <code>optional int32 poll_sleep_duration_seconds = 4 [default = 10];</code>
+       * <code>optional int32 poll_sleep_duration_seconds = 2 [default = 10];</code>
        */
       public Builder setPollSleepDurationSeconds(int value) {
         bitField0_ |= 0x00000002;
@@ -743,7 +824,7 @@ public final class Proto {
         return this;
       }
       /**
-       * <code>optional int32 poll_sleep_duration_seconds = 4 [default = 10];</code>
+       * <code>optional int32 poll_sleep_duration_seconds = 2 [default = 10];</code>
        */
       public Builder clearPollSleepDurationSeconds() {
         bitField0_ = (bitField0_ & ~0x00000002);
@@ -754,13 +835,13 @@ public final class Proto {
 
       private java.lang.Object acmeDirectoryPrefix_ = ".well-known/acme-challenge";
       /**
-       * <code>optional string acme_directory_prefix = 5 [default = ".well-known/acme-challenge"];</code>
+       * <code>optional string acme_directory_prefix = 3 [default = ".well-known/acme-challenge"];</code>
        */
       public boolean hasAcmeDirectoryPrefix() {
         return ((bitField0_ & 0x00000004) == 0x00000004);
       }
       /**
-       * <code>optional string acme_directory_prefix = 5 [default = ".well-known/acme-challenge"];</code>
+       * <code>optional string acme_directory_prefix = 3 [default = ".well-known/acme-challenge"];</code>
        */
       public java.lang.String getAcmeDirectoryPrefix() {
         java.lang.Object ref = acmeDirectoryPrefix_;
@@ -777,7 +858,7 @@ public final class Proto {
         }
       }
       /**
-       * <code>optional string acme_directory_prefix = 5 [default = ".well-known/acme-challenge"];</code>
+       * <code>optional string acme_directory_prefix = 3 [default = ".well-known/acme-challenge"];</code>
        */
       public com.google.protobuf.ByteString
           getAcmeDirectoryPrefixBytes() {
@@ -793,7 +874,7 @@ public final class Proto {
         }
       }
       /**
-       * <code>optional string acme_directory_prefix = 5 [default = ".well-known/acme-challenge"];</code>
+       * <code>optional string acme_directory_prefix = 3 [default = ".well-known/acme-challenge"];</code>
        */
       public Builder setAcmeDirectoryPrefix(
           java.lang.String value) {
@@ -806,7 +887,7 @@ public final class Proto {
         return this;
       }
       /**
-       * <code>optional string acme_directory_prefix = 5 [default = ".well-known/acme-challenge"];</code>
+       * <code>optional string acme_directory_prefix = 3 [default = ".well-known/acme-challenge"];</code>
        */
       public Builder clearAcmeDirectoryPrefix() {
         bitField0_ = (bitField0_ & ~0x00000004);
@@ -815,7 +896,7 @@ public final class Proto {
         return this;
       }
       /**
-       * <code>optional string acme_directory_prefix = 5 [default = ".well-known/acme-challenge"];</code>
+       * <code>optional string acme_directory_prefix = 3 [default = ".well-known/acme-challenge"];</code>
        */
       public Builder setAcmeDirectoryPrefixBytes(
           com.google.protobuf.ByteString value) {
@@ -828,12 +909,88 @@ public final class Proto {
         return this;
       }
 
+      private java.lang.Object restartNotificationFilename_ = "";
+      /**
+       * <code>optional string restart_notification_filename = 4;</code>
+       */
+      public boolean hasRestartNotificationFilename() {
+        return ((bitField0_ & 0x00000008) == 0x00000008);
+      }
+      /**
+       * <code>optional string restart_notification_filename = 4;</code>
+       */
+      public java.lang.String getRestartNotificationFilename() {
+        java.lang.Object ref = restartNotificationFilename_;
+        if (!(ref instanceof java.lang.String)) {
+          com.google.protobuf.ByteString bs =
+              (com.google.protobuf.ByteString) ref;
+          java.lang.String s = bs.toStringUtf8();
+          if (bs.isValidUtf8()) {
+            restartNotificationFilename_ = s;
+          }
+          return s;
+        } else {
+          return (java.lang.String) ref;
+        }
+      }
+      /**
+       * <code>optional string restart_notification_filename = 4;</code>
+       */
+      public com.google.protobuf.ByteString
+          getRestartNotificationFilenameBytes() {
+        java.lang.Object ref = restartNotificationFilename_;
+        if (ref instanceof String) {
+          com.google.protobuf.ByteString b = 
+              com.google.protobuf.ByteString.copyFromUtf8(
+                  (java.lang.String) ref);
+          restartNotificationFilename_ = b;
+          return b;
+        } else {
+          return (com.google.protobuf.ByteString) ref;
+        }
+      }
+      /**
+       * <code>optional string restart_notification_filename = 4;</code>
+       */
+      public Builder setRestartNotificationFilename(
+          java.lang.String value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  bitField0_ |= 0x00000008;
+        restartNotificationFilename_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional string restart_notification_filename = 4;</code>
+       */
+      public Builder clearRestartNotificationFilename() {
+        bitField0_ = (bitField0_ & ~0x00000008);
+        restartNotificationFilename_ = getDefaultInstance().getRestartNotificationFilename();
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional string restart_notification_filename = 4;</code>
+       */
+      public Builder setRestartNotificationFilenameBytes(
+          com.google.protobuf.ByteString value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  bitField0_ |= 0x00000008;
+        restartNotificationFilename_ = value;
+        onChanged();
+        return this;
+      }
+
       private java.util.List<letsencrypt.Proto.AccountConfig> accountConfig_ =
         java.util.Collections.emptyList();
       private void ensureAccountConfigIsMutable() {
-        if (!((bitField0_ & 0x00000008) == 0x00000008)) {
+        if (!((bitField0_ & 0x00000010) == 0x00000010)) {
           accountConfig_ = new java.util.ArrayList<letsencrypt.Proto.AccountConfig>(accountConfig_);
-          bitField0_ |= 0x00000008;
+          bitField0_ |= 0x00000010;
          }
       }
 
@@ -841,7 +998,7 @@ public final class Proto {
           letsencrypt.Proto.AccountConfig, letsencrypt.Proto.AccountConfig.Builder, letsencrypt.Proto.AccountConfigOrBuilder> accountConfigBuilder_;
 
       /**
-       * <code>repeated .letsencrypt.AccountConfig account_config = 6;</code>
+       * <code>repeated .letsencrypt.AccountConfig account_config = 5;</code>
        */
       public java.util.List<letsencrypt.Proto.AccountConfig> getAccountConfigList() {
         if (accountConfigBuilder_ == null) {
@@ -851,7 +1008,7 @@ public final class Proto {
         }
       }
       /**
-       * <code>repeated .letsencrypt.AccountConfig account_config = 6;</code>
+       * <code>repeated .letsencrypt.AccountConfig account_config = 5;</code>
        */
       public int getAccountConfigCount() {
         if (accountConfigBuilder_ == null) {
@@ -861,7 +1018,7 @@ public final class Proto {
         }
       }
       /**
-       * <code>repeated .letsencrypt.AccountConfig account_config = 6;</code>
+       * <code>repeated .letsencrypt.AccountConfig account_config = 5;</code>
        */
       public letsencrypt.Proto.AccountConfig getAccountConfig(int index) {
         if (accountConfigBuilder_ == null) {
@@ -871,7 +1028,7 @@ public final class Proto {
         }
       }
       /**
-       * <code>repeated .letsencrypt.AccountConfig account_config = 6;</code>
+       * <code>repeated .letsencrypt.AccountConfig account_config = 5;</code>
        */
       public Builder setAccountConfig(
           int index, letsencrypt.Proto.AccountConfig value) {
@@ -888,7 +1045,7 @@ public final class Proto {
         return this;
       }
       /**
-       * <code>repeated .letsencrypt.AccountConfig account_config = 6;</code>
+       * <code>repeated .letsencrypt.AccountConfig account_config = 5;</code>
        */
       public Builder setAccountConfig(
           int index, letsencrypt.Proto.AccountConfig.Builder builderForValue) {
@@ -902,7 +1059,7 @@ public final class Proto {
         return this;
       }
       /**
-       * <code>repeated .letsencrypt.AccountConfig account_config = 6;</code>
+       * <code>repeated .letsencrypt.AccountConfig account_config = 5;</code>
        */
       public Builder addAccountConfig(letsencrypt.Proto.AccountConfig value) {
         if (accountConfigBuilder_ == null) {
@@ -918,7 +1075,7 @@ public final class Proto {
         return this;
       }
       /**
-       * <code>repeated .letsencrypt.AccountConfig account_config = 6;</code>
+       * <code>repeated .letsencrypt.AccountConfig account_config = 5;</code>
        */
       public Builder addAccountConfig(
           int index, letsencrypt.Proto.AccountConfig value) {
@@ -935,7 +1092,7 @@ public final class Proto {
         return this;
       }
       /**
-       * <code>repeated .letsencrypt.AccountConfig account_config = 6;</code>
+       * <code>repeated .letsencrypt.AccountConfig account_config = 5;</code>
        */
       public Builder addAccountConfig(
           letsencrypt.Proto.AccountConfig.Builder builderForValue) {
@@ -949,7 +1106,7 @@ public final class Proto {
         return this;
       }
       /**
-       * <code>repeated .letsencrypt.AccountConfig account_config = 6;</code>
+       * <code>repeated .letsencrypt.AccountConfig account_config = 5;</code>
        */
       public Builder addAccountConfig(
           int index, letsencrypt.Proto.AccountConfig.Builder builderForValue) {
@@ -963,7 +1120,7 @@ public final class Proto {
         return this;
       }
       /**
-       * <code>repeated .letsencrypt.AccountConfig account_config = 6;</code>
+       * <code>repeated .letsencrypt.AccountConfig account_config = 5;</code>
        */
       public Builder addAllAccountConfig(
           java.lang.Iterable<? extends letsencrypt.Proto.AccountConfig> values) {
@@ -978,12 +1135,12 @@ public final class Proto {
         return this;
       }
       /**
-       * <code>repeated .letsencrypt.AccountConfig account_config = 6;</code>
+       * <code>repeated .letsencrypt.AccountConfig account_config = 5;</code>
        */
       public Builder clearAccountConfig() {
         if (accountConfigBuilder_ == null) {
           accountConfig_ = java.util.Collections.emptyList();
-          bitField0_ = (bitField0_ & ~0x00000008);
+          bitField0_ = (bitField0_ & ~0x00000010);
           onChanged();
         } else {
           accountConfigBuilder_.clear();
@@ -991,7 +1148,7 @@ public final class Proto {
         return this;
       }
       /**
-       * <code>repeated .letsencrypt.AccountConfig account_config = 6;</code>
+       * <code>repeated .letsencrypt.AccountConfig account_config = 5;</code>
        */
       public Builder removeAccountConfig(int index) {
         if (accountConfigBuilder_ == null) {
@@ -1004,14 +1161,14 @@ public final class Proto {
         return this;
       }
       /**
-       * <code>repeated .letsencrypt.AccountConfig account_config = 6;</code>
+       * <code>repeated .letsencrypt.AccountConfig account_config = 5;</code>
        */
       public letsencrypt.Proto.AccountConfig.Builder getAccountConfigBuilder(
           int index) {
         return getAccountConfigFieldBuilder().getBuilder(index);
       }
       /**
-       * <code>repeated .letsencrypt.AccountConfig account_config = 6;</code>
+       * <code>repeated .letsencrypt.AccountConfig account_config = 5;</code>
        */
       public letsencrypt.Proto.AccountConfigOrBuilder getAccountConfigOrBuilder(
           int index) {
@@ -1021,7 +1178,7 @@ public final class Proto {
         }
       }
       /**
-       * <code>repeated .letsencrypt.AccountConfig account_config = 6;</code>
+       * <code>repeated .letsencrypt.AccountConfig account_config = 5;</code>
        */
       public java.util.List<? extends letsencrypt.Proto.AccountConfigOrBuilder> 
            getAccountConfigOrBuilderList() {
@@ -1032,14 +1189,14 @@ public final class Proto {
         }
       }
       /**
-       * <code>repeated .letsencrypt.AccountConfig account_config = 6;</code>
+       * <code>repeated .letsencrypt.AccountConfig account_config = 5;</code>
        */
       public letsencrypt.Proto.AccountConfig.Builder addAccountConfigBuilder() {
         return getAccountConfigFieldBuilder().addBuilder(
             letsencrypt.Proto.AccountConfig.getDefaultInstance());
       }
       /**
-       * <code>repeated .letsencrypt.AccountConfig account_config = 6;</code>
+       * <code>repeated .letsencrypt.AccountConfig account_config = 5;</code>
        */
       public letsencrypt.Proto.AccountConfig.Builder addAccountConfigBuilder(
           int index) {
@@ -1047,7 +1204,7 @@ public final class Proto {
             index, letsencrypt.Proto.AccountConfig.getDefaultInstance());
       }
       /**
-       * <code>repeated .letsencrypt.AccountConfig account_config = 6;</code>
+       * <code>repeated .letsencrypt.AccountConfig account_config = 5;</code>
        */
       public java.util.List<letsencrypt.Proto.AccountConfig.Builder> 
            getAccountConfigBuilderList() {
@@ -1060,7 +1217,7 @@ public final class Proto {
           accountConfigBuilder_ = new com.google.protobuf.RepeatedFieldBuilder<
               letsencrypt.Proto.AccountConfig, letsencrypt.Proto.AccountConfig.Builder, letsencrypt.Proto.AccountConfigOrBuilder>(
                   accountConfig_,
-                  ((bitField0_ & 0x00000008) == 0x00000008),
+                  ((bitField0_ & 0x00000010) == 0x00000010),
                   getParentForChildren(),
                   isClean());
           accountConfig_ = null;
@@ -3618,23 +3775,24 @@ public final class Proto {
       descriptor;
   static {
     java.lang.String[] descriptorData = {
-      "\n\014config.proto\022\013letsencrypt\"\265\001\n\006Config\022\023" +
+      "\n\014config.proto\022\013letsencrypt\"\334\001\n\006Config\022\023" +
       "\n\013session_url\030\001 \001(\t\022\'\n\033poll_sleep_durati" +
-      "on_seconds\030\004 \001(\005:\00210\0229\n\025acme_directory_p" +
-      "refix\030\005 \001(\t:\032.well-known/acme-challenge\022" +
-      "2\n\016account_config\030\006 \003(\0132\032.letsencrypt.Ac" +
-      "countConfig\"\200\003\n\rAccountConfig\022\023\n\013account" +
-      "_url\030\001 \001(\t\022\025\n\raccount_email\030\002 \001(\t\022\025\n\rkey" +
-      "_directory\030\003 \001(\t\022=\n\034account_private_key_" +
-      "filename\030\004 \001(\t:\027account_private_key.pem\022" +
-      ";\n\033account_public_key_filename\030\005 \001(\t:\026ac",
-      "count_public_key.pem\022=\n)certificate_sign" +
-      "ing_request_filename_spec\030\006 \001(\t:\n%s_csr." +
-      "pem\0220\n\031certificate_filename_spec\030\007 \001(\t:\r" +
-      "%s_signed.pem\022\032\n\022buffer_period_days\030\010 \001(" +
-      "\005\022#\n\006domain\030\t \003(\0132\023.letsencrypt.Domain\"9" +
-      "\n\006Domain\022\023\n\013server_name\030\001 \003(\t\022\032\n\022web_roo" +
-      "t_directory\030\002 \001(\tB\024\n\013letsencryptB\005Proto"
+      "on_seconds\030\002 \001(\005:\00210\0229\n\025acme_directory_p" +
+      "refix\030\003 \001(\t:\032.well-known/acme-challenge\022" +
+      "%\n\035restart_notification_filename\030\004 \001(\t\0222" +
+      "\n\016account_config\030\005 \003(\0132\032.letsencrypt.Acc" +
+      "ountConfig\"\200\003\n\rAccountConfig\022\023\n\013account_" +
+      "url\030\001 \001(\t\022\025\n\raccount_email\030\002 \001(\t\022\025\n\rkey_" +
+      "directory\030\003 \001(\t\022=\n\034account_private_key_f" +
+      "ilename\030\004 \001(\t:\027account_private_key.pem\022;",
+      "\n\033account_public_key_filename\030\005 \001(\t:\026acc" +
+      "ount_public_key.pem\022=\n)certificate_signi" +
+      "ng_request_filename_spec\030\006 \001(\t:\n%s_csr.p" +
+      "em\0220\n\031certificate_filename_spec\030\007 \001(\t:\r%" +
+      "s_signed.pem\022\032\n\022buffer_period_days\030\010 \001(\005" +
+      "\022#\n\006domain\030\t \003(\0132\023.letsencrypt.Domain\"9\n" +
+      "\006Domain\022\023\n\013server_name\030\001 \003(\t\022\032\n\022web_root" +
+      "_directory\030\002 \001(\tB\024\n\013letsencryptB\005Proto"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
         new com.google.protobuf.Descriptors.FileDescriptor.    InternalDescriptorAssigner() {
@@ -3653,7 +3811,7 @@ public final class Proto {
     internal_static_letsencrypt_Config_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessage.FieldAccessorTable(
         internal_static_letsencrypt_Config_descriptor,
-        new java.lang.String[] { "SessionUrl", "PollSleepDurationSeconds", "AcmeDirectoryPrefix", "AccountConfig", });
+        new java.lang.String[] { "SessionUrl", "PollSleepDurationSeconds", "AcmeDirectoryPrefix", "RestartNotificationFilename", "AccountConfig", });
     internal_static_letsencrypt_AccountConfig_descriptor =
       getDescriptor().getMessageTypes().get(1);
     internal_static_letsencrypt_AccountConfig_fieldAccessorTable = new

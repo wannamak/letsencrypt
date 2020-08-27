@@ -41,6 +41,7 @@ import com.google.protobuf.TextFormat.ParseException;
 public class Main {
   private final Logger logger = Logger.getLogger(Main.class.getName());
   private final Proto.Config config;
+  private boolean restartRequired;
 
   public static void main(String args[]) throws Exception {
     new Main(args).run();
@@ -61,6 +62,9 @@ public class Main {
       Supplier<Account> accountSupplier = new AccountSupplier(accountConfig, sessionSupplier);
       process(accountSupplier, accountConfig, keyLoader);
     }
+    if (restartRequired) {
+      Files.write(new byte[0], new File(config.getRestartNotificationFilename()));
+    }
   }
 
   public void process(Supplier<Account> accountSupplier, Proto.AccountConfig accountConfig,
@@ -69,6 +73,7 @@ public class Main {
       Set<X509Certificate> certificates = keyLoader.loadCertificate(domain.getServerName(0));
       if (isExpiringWithin(Period.ofDays(accountConfig.getBufferPeriodDays()), certificates)) {
         new CertificateRenewer(accountSupplier.get(), accountConfig, config, domain, keyLoader).renew();
+        restartRequired = true;
       }
     }
   }

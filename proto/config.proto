@@ -10,10 +10,11 @@ option java_outer_classname = "Proto";
 message Config {
   optional string session_url = 1;
 
-  optional int32 poll_sleep_duration_seconds = 4 [default = 10];
-  optional string acme_directory_prefix = 5 [default = ".well-known/acme-challenge"];
-
-  repeated AccountConfig account_config = 6;
+  optional int32 poll_sleep_duration_seconds = 2 [default = 10];
+  optional string acme_directory_prefix = 3 [default = ".well-known/acme-challenge"];
+  optional string restart_notification_filename = 4;
+  
+  repeated AccountConfig account_config = 5;
 }
 
 message AccountConfig {
