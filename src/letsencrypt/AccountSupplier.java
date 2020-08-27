@@ -19,12 +19,8 @@
 
 package letsencrypt;
 
-import java.io.IOException;
 import java.net.URL;
 import java.security.KeyPair;
-import java.security.NoSuchAlgorithmException;
-import java.security.cert.CertificateException;
-import java.security.spec.InvalidKeySpecException;
 import java.util.function.Supplier;
 import java.util.logging.Logger;
 
@@ -32,7 +28,6 @@ import org.shredzone.acme4j.Account;
 import org.shredzone.acme4j.AccountBuilder;
 import org.shredzone.acme4j.Login;
 import org.shredzone.acme4j.Session;
-import org.shredzone.acme4j.exception.AcmeException;
 
 import com.google.common.base.Preconditions;
 
@@ -54,16 +49,14 @@ public class AccountSupplier implements Supplier<Account> {
     if (account == null) {
       try {
         account = loadAccount();
-      } catch (CertificateException | NoSuchAlgorithmException | InvalidKeySpecException | IOException
-          | AcmeException e) {
+      } catch (Exception e) {
         throw new IllegalStateException(e);
       }
     }
     return Preconditions.checkNotNull(account);
   }
 
-  private Account loadAccount()
-      throws CertificateException, NoSuchAlgorithmException, InvalidKeySpecException, IOException, AcmeException {
+  private Account loadAccount() throws Exception {
     Session session = sessionSupplier.get();
     if (accountConfig.getAccountUrl().isEmpty()) {
       return createAccount(session, keyLoader, accountConfig);
@@ -77,7 +70,7 @@ public class AccountSupplier implements Supplier<Account> {
   }
 
   public Account createAccount(Session session, KeyLoader keyLoader, Proto.AccountConfig accountConfig)
-      throws AcmeException, CertificateException, NoSuchAlgorithmException, InvalidKeySpecException, IOException {
+      throws Exception {
     KeyPair accountKeyPair = keyLoader.loadAccountKey();
 
     Account account = new AccountBuilder().addContact("mailto:" + accountConfig.getAccountEmail())
