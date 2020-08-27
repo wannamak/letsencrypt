@@ -1,0 +1,17 @@
+#
+# Sample configuration
+#
+
+#session_url:  "acme://letsencrypt.org/staging"
+session_url: "acme://letsencrypt.org"
+key_directory: "XXXXXX"
+account_config {
+  #account_url: "https://acme-staging-v02.api.letsencrypt.org/acme/acct/XXXXXX"
+  account_url: "https://acme-v02.api.letsencrypt.org/acme/acct/XXXXXX"
+  account_email: "email@mailinator.com"
+  domain {
+    server_name: "my-domain.com"
+    server_name: "www.my-domain.com"
+    web_root_directory: "/somewhere/htdocs"
+  }
+}

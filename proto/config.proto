@@ -1,0 +1,39 @@
+// letsencrypt-client configuration
+
+syntax = "proto2";
+
+package letsencrypt;
+
+option java_package = "letsencrypt";
+option java_outer_classname = "Proto";
+
+message Config {
+  optional string session_url = 1;
+
+  optional int32 poll_sleep_duration_seconds = 4 [default = 10];
+  optional string acme_directory_prefix = 5 [default = ".well-known/acme-challenge"];
+
+  repeated AccountConfig account_config = 6;
+}
+
+message AccountConfig {
+  optional string account_url = 1;
+  optional string account_email = 2;
+
+  optional string key_directory = 3;
+
+  optional string account_private_key_filename = 4 [default = "account_private_key.pem"];
+  optional string account_public_key_filename = 5 [default = "account_public_key.pem"];
+
+  optional string certificate_signing_request_filename_spec = 6 [default = "%s_csr.pem"];
+  optional string certificate_filename_spec = 7 [default = "%s_signed.pem"];
+
+  optional int32 buffer_period_days = 8;
+
+  repeated Domain domain = 9;
+}
+
+message Domain {
+  repeated string server_name = 1;
+  optional string web_root_directory = 2;
+}

@@ -1,0 +1,47 @@
+<project name="letsencrypt" default="build">
+  <property name="bin" location="bin/" />
+
+  <property name="config-proto" location="proto/config.proto" relative="yes" />
+  <property name="config-proto.java" location="src/letsencrypt/Proto.java" />
+
+  <path id="main-classpath">
+    <path location="lib/guava-21.0.jar" />
+    <path location="lib/acme4j-client-2.10.jar" />
+    <path location="lib/jose4j-0.7.2.jar" />
+    <path location="lib/slf4j-api-1.7.9.jar" />
+    <path location="lib/slf4j-jdk14-1.7.9.jar" />
+    <path location="lib/protobuf-2.6.1.jar" />
+    <path location="${bin}" />
+  </path>
+
+  <path id="test-classpath">
+    <path refid="main-classpath" />
+  </path>
+
+  <target name="checkprotoforchanges">
+    <uptodate property="build-config-proto.notrequired" srcfile="${config-proto}" targetfile="${config-proto.java}" />
+  </target> 
+
+  <target name="build-config-proto" depends="checkprotoforchanges"
+          unless="build-config-proto.notrequired" >
+    <mkdir dir="${bin}" />
+    <exec executable="protoc" failonerror="true">
+      <arg value="-Iproto" />
+      <arg value="${config-proto}" />
+      <arg value="--java_out=src" />
+    </exec>
+  </target>
+
+  <target name="build" depends="build-config-proto">
+    <mkdir dir="${bin}" />
+    <javac srcdir="src" includes="**" destdir="${bin}" includeantruntime="false" debug="true" >
+      <classpath>
+        <path refid="main-classpath"/>
+      </classpath>
+    </javac>
+  </target>
+
+  <target name="clean">
+    <delete dir="bin" />
+  </target>
+</project>
