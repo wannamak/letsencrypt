@@ -26,6 +26,7 @@ import java.security.cert.X509Certificate;
 import java.time.OffsetDateTime;
 import java.time.Period;
 import java.time.ZoneOffset;
+import java.time.temporal.ChronoUnit;
 import java.util.Set;
 import java.util.function.Supplier;
 import java.util.logging.Logger;
@@ -71,22 +72,30 @@ public class Main {
       KeyLoader keyLoader) throws Exception {
     for (Proto.Domain domain : accountConfig.getDomainList()) {
       Set<X509Certificate> certificates = keyLoader.loadCertificate(domain.getServerName(0));
-      if (isExpiringWithin(Period.ofDays(accountConfig.getBufferPeriodDays()), certificates)) {
+      if (isExpiringWithin(Period.ofDays(accountConfig.getBufferPeriodDays()), certificates, domain)) {
         new CertificateRenewer(accountSupplier.get(), accountConfig, config, domain, keyLoader).renew();
         restartRequired = true;
       }
     }
   }
 
-  private boolean isExpiringWithin(Period grace, Set<X509Certificate> certificates) {
-    OffsetDateTime nowPlusGrace = OffsetDateTime.now().plus(grace);
+  private boolean isExpiringWithin(Period grace, Set<X509Certificate> certificates, Proto.Domain domain) {
+    OffsetDateTime now = OffsetDateTime.now();
+    OffsetDateTime nowPlusGrace = now.plus(grace);
+    OffsetDateTime earliestExpiration = null;
     for (X509Certificate certificate : certificates) {
       OffsetDateTime expiration = certificate.getNotAfter().toInstant().atOffset(ZoneOffset.UTC);
+      if (earliestExpiration == null
+          || expiration.isBefore(earliestExpiration)) {
+        earliestExpiration = expiration;
+      }
       if (!nowPlusGrace.isBefore(expiration)) {
-        logger.info("Expiration: " + expiration);
+        logger.info(domain.getServerName(0) + " has or will expire at " + expiration);
         return true;
       }
     }
+    logger.info(domain.getServerName(0) + " expires in "
+        + now.until(earliestExpiration, ChronoUnit.DAYS));
     return false;
   }
 
