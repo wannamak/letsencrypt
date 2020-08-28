@@ -75,6 +75,9 @@ public class KeyLoader {
   public Set<X509Certificate> loadCertificate(String domainName) throws CertificateException, NoSuchAlgorithmException, InvalidKeySpecException, IOException  {
     File file = new File(accountConfig.getKeyDirectory(),
         String.format(accountConfig.getCertificateFilenameSpec(), domainName));
+    if (!file.exists()) {
+      return null;
+    }
     CertificateFactory factory = CertificateFactory.getInstance("X.509");
     logger.info("Reading certificate from " + file.getAbsolutePath());
     Collection<? extends Certificate> certificates = factory.generateCertificates(

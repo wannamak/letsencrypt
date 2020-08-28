@@ -29,6 +29,7 @@ import java.time.ZoneOffset;
 import java.time.temporal.ChronoUnit;
 import java.util.Set;
 import java.util.function.Supplier;
+import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import org.shredzone.acme4j.Account;
@@ -57,14 +58,19 @@ public class Main {
   }
 
   public void run() throws Exception {
-    Supplier<Session> sessionSupplier = new SessionSupplier(config.getSessionUrl());
-    for (Proto.AccountConfig accountConfig : config.getAccountConfigList()) {
-      KeyLoader keyLoader = new KeyLoader(accountConfig);
-      Supplier<Account> accountSupplier = new AccountSupplier(accountConfig, sessionSupplier);
-      process(accountSupplier, accountConfig, keyLoader);
-    }
-    if (restartRequired) {
-      Files.write(new byte[0], new File(config.getRestartNotificationFilename()));
+    try {
+      Supplier<Session> sessionSupplier = new SessionSupplier(config.getSessionUrl());
+      for (Proto.AccountConfig accountConfig : config.getAccountConfigList()) {
+        KeyLoader keyLoader = new KeyLoader(accountConfig);
+        Supplier<Account> accountSupplier = new AccountSupplier(accountConfig, sessionSupplier);
+        process(accountSupplier, accountConfig, keyLoader);
+      }
+      if (restartRequired) {
+        Files.write(new byte[0], new File(config.getRestartNotificationFilename()));
+      }
+    } catch (Throwable t) {
+      logger.log(Level.SEVERE, "Aborting", t);
+      throw t;
     }
   }
 
@@ -72,7 +78,8 @@ public class Main {
       KeyLoader keyLoader) throws Exception {
     for (Proto.Domain domain : accountConfig.getDomainList()) {
       Set<X509Certificate> certificates = keyLoader.loadCertificate(domain.getServerName(0));
-      if (isExpiringWithin(Period.ofDays(accountConfig.getBufferPeriodDays()), certificates, domain)) {
+      if (certificates == null
+          || isExpiringWithin(Period.ofDays(accountConfig.getBufferPeriodDays()), certificates, domain)) {
         new CertificateRenewer(accountSupplier.get(), accountConfig, config, domain, keyLoader).renew();
         restartRequired = true;
       }
@@ -95,7 +102,7 @@ public class Main {
       }
     }
     logger.info(domain.getServerName(0) + " expires in "
-        + now.until(earliestExpiration, ChronoUnit.DAYS));
+        + now.until(earliestExpiration, ChronoUnit.DAYS) + " days");
     return false;
   }
 
