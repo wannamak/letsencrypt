@@ -65,7 +65,7 @@ public class AccountSupplier implements Supplier<Account> {
     URL accountUrl = new URL(accountConfig.getAccountUrl());
     Login login = session.login(accountUrl, accountKeyPair);
     Account account = login.getAccount();
-    logger.info("Returining existing account " + account.getLocation());
+    logger.info("Returning existing account " + account.getLocation());
     return account;
   }
 
