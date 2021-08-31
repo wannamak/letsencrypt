@@ -100,7 +100,7 @@ public class CertificateRenewer {
   private void awaitChallengeCompletion(Authorization authorization, Http01Challenge challenge,
       String webRootDirectory) throws IOException, AcmeException {
     File tempDir = new File(webRootDirectory, config.getAcmeDirectoryPrefix());
-    Preconditions.checkState(tempDir.isDirectory(), "Expected an existing directory");
+    Preconditions.checkState(tempDir.isDirectory(), "Expected an existing directory: " + tempDir.getAbsolutePath());
     File tempFile = new File(tempDir, challenge.getToken());
     Files.write(challenge.getAuthorization(), tempFile, StandardCharsets.UTF_8);
     logger.info("Wrote challenge file: " + tempFile.getAbsolutePath());
